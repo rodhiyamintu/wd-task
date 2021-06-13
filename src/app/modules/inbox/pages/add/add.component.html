@@ -1,0 +1,71 @@
+<div class="wd-page wd-page-tabed">
+    <div class="wd-page-title">
+        <div class="wd-page-title-inner">
+            <h4>Compose</h4>
+            <nav class="wd-breadcrumbs" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a [routerLink]="['/message']">Messages</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Compose</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="wd-page-title-control">
+            <button class="btn btn-primary btn-rounded" [routerLink]="['/message']">Back</button>
+            <!-- <button class="btn btn-primary btn-rounded">Save</button> -->
+        </div>
+    </div>
+    <div class="wd-page-body">
+
+        <div class="wd-panel">
+            <div class="wd-panel-body">
+
+                <form #messageForm="ngForm" (ngSubmit)="onSubmit(messageForm)">
+                    <input type="hidden" name="sendById" [(ngModel)]="inbox.sendById" />
+                    <input type="hidden" name="sendByName" [(ngModel)]="inbox.sendByName" />
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label class="form-label">Assigned To</label><br>
+                                <p-multiSelect [options]="users" name="uid" [(ngModel)]="selectedUser"
+                                    optionLabel="displayName" optionValue="uid" display="chip"
+                                    placeholder="Assigned To">
+                                </p-multiSelect>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label class="form-label">Subject</label>
+                                <input type="text" class="form-control" name="subject" placeholder="Subject"
+                                    [(ngModel)]="inbox.subject" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Message</label><br>
+                                <p-editor name="message" [(ngModel)]="inbox.message" [style]="{'height':'320px'}">
+                                </p-editor>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button class="btn btn-primary btn-rounded" [disabled]="messageForm.invalid">Send</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<p-blockUI [blocked]="blocked">
+    <p-progressSpinner strokeWidth="4"></p-progressSpinner>
+</p-blockUI>
+<p-toast position="top-center" [showTransformOptions]="'translateX(100%)'"></p-toast>

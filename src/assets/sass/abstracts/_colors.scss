@@ -1,0 +1,91 @@
+// gray colors
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+
+// base colors
+$white: #ffffff !default;
+$black: #000000 !default;
+$blue: #0d6efd !default;
+$brown: #471818 !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #d63384 !default;
+$red: #a91e2c !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #18634b !default;
+$teal: #20c997 !default;
+$cyan: #0dcaf0 !default;
+
+// theme color
+$primary: $blue;
+$primary-dark: darken(
+    $color: $primary,
+    $amount: 5%,
+);
+$secondary: #09090a;
+$secondary-dark: darken(
+    $color: $secondary,
+    $amount: 5%,
+);
+$danger: #d80000;
+$danger-dark: darken(
+    $color: $danger,
+    $amount: 5%,
+);
+$success: #028900;
+$success-dark: darken(
+    $color: $success,
+    $amount: 5%,
+);
+$info: #00d8ff;
+$warning: #ffae00;
+$light: $gray-100 !default;
+$dark: $gray-900 !default;
+
+// colors
+$colors: (
+    "primary": (
+        "bg-color": $primary,
+        "color": $white,
+    ),
+    "secondary": (
+        "bg-color": $secondary,
+        "color": $white,
+    ),
+    "danger": (
+        "bg-color": $danger,
+        "color": $white,
+    ),
+    "success": (
+        "bg-color": $success,
+        "color": $white,
+    ),
+    "info": (
+        "bg-color": $info,
+        "color": $black,
+    ),
+    "warning": (
+        "bg-color": $warning,
+        "color": $black,
+    ),
+    "light": (
+        "bg-color": $light,
+        "color": $black,
+    ),
+    "dark": (
+        "bg-color": $dark,
+        "color": $white,
+    ),
+    "white": (
+        "bg-color": $white,
+        "color": $dark,
+    ),
+);

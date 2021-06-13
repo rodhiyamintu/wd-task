@@ -1,0 +1,102 @@
+<!-- main section -->
+<div class="wd-wrapper" id="wdWrapper">
+
+    <!-- wrapper sidebar start -->
+    <div class="wd-sidebar" id="wdSidebar">
+
+        <div class="wd-sidebar-header">
+            <h4><span>WD</span>ADMIN</h4>
+
+            <!-- <div class="wd-sidebar-header-icon" id="wdSidebarHeaderIcon">
+                <i class="ri-close-line ri-xl"></i>
+            </div> -->
+        </div>
+        <div class="wd-sidebar-auth">
+            <div class="wd-sidebar-auth-profile">
+                <!-- <img src="<?= $base_url ?>assets/images/users/94.jpg" alt="" /> -->
+            </div>
+            <div class=" wd-sidebar-auth-text">
+                <strong>{{currentUser.displayName}}</strong>
+                <p>Online</p>
+            </div>
+        </div>
+        <div class="wd-sidebar-navbar">
+            <ul class="wd-sidebar-navbar-nav">
+                <li class="wd-sidebar-navbar-divider">
+                    NAVIGATION
+                </li>
+                <li>
+                    <a href="" [routerLink]="['/dashboard']">
+                        <div class="wd-sidebar-navbar-text"><i class="ri-profile-line ri-xl"></i> Dashboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="" [routerLink]="['/settings']">
+                        <div class="wd-sidebar-navbar-text"><i class="ri-settings-4-line ri-xl"></i> Settings</div>
+                    </a>
+                </li>
+                <li *ngIf="currentUser.role == 'Super Admin'">
+                    <a href="" [routerLink]="['/user']">
+                        <div class="wd-sidebar-navbar-text"><i class="ri-contacts-book-2-line ri-xl"></i> Users</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="" [routerLink]="['/message']">
+                        <div class="wd-sidebar-navbar-text"><i class="ri-mail-line ri-xl"></i> Messages</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="" [routerLink]="['/project']">
+                        <div class="wd-sidebar-navbar-text"><i class="ri-folder-2-line ri-xl"></i> Projects</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- wrapper sidebar end -->
+
+    <div class="wd-wrapper-right">
+
+        <!-- wrapper navbar start -->
+        <div class="wd-header">
+            <div class="wd-header-menu">
+                <div class="wd-header-menu-icon" id="wdHeaderMenuIcon">
+                    <i class="ri-menu-line ri-xl"></i>
+                </div>
+            </div>
+            <div class="wd-header-navbar">
+                <ul class="wd-header-navbar-nav">
+                    <li><a href="#"><i class="ri-notification-2-line ri-xl"></i></a></li>
+                    <li>
+                        <a href="#" class="wd-dropdown" wd-toggle="#wdDropdown1"><i
+                                class="ri-user-4-line ri-xl"></i></a>
+                        <ul class="wd-dropdown-menu" id="wdDropdown1">
+                            <li><a href=""><i class="ri-profile-line ri-xl"></i> My Account</a></li>
+                            <li><a href="" [routerLink]="['/messages']"><i class="ri-mail-line ri-xl"></i> Messages</a>
+                            </li>
+                            <li><a href="" [routerLink]="['/settings']"><i class="ri-settings-3-line ri-xl"></i>
+                                    Settings</a></li>
+                            <li><a href="javascript:void(0)" (click)="onLogout()"><i
+                                        class="ri-shut-down-line ri-xl"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- wrapper navbar end -->
+
+        <!-- wrapper content start -->
+        <div class="wd-wrapper-content">
+            <router-outlet></router-outlet>
+
+            <div class="wd-footer">
+                <p>© 2021 wdcoders.com. All rights reserved.</p>
+            </div>
+        </div>
+        <!-- wrapper content end -->
+
+
+    </div>
+
+</div>
+<!-- main section -->

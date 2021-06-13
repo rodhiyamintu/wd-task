@@ -1,0 +1,58 @@
+<div class="wd-page wd-page-tabed">
+    <div class="wd-page-title">
+        <div class="wd-page-title-inner">
+            <h4>Users</h4>
+            <nav class="wd-breadcrumbs" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Users</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="wd-page-title-control">
+            <button class="btn btn-primary btn-rounded" [routerLink]="['/user/add']">Add User</button>
+            <!-- <button class="btn btn-primary btn-rounded">Save</button> -->
+        </div>
+    </div>
+    <div class="wd-page-body">
+
+        <div class="wd-panel">
+            <div class="wd-panel-body">
+
+                <p-table #dt1 [value]="users" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [rowsPerPageOptions]="[10,25,50]" [loading]="loading">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="displayName">Name <p-sortIcon field="code"></p-sortIcon>
+                            </th>
+                            <th>Email</th>
+                            <th>On Created</th>
+                            <th>Role</th>
+                            <!-- <th>Action</th> -->
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-u>
+                        <tr>
+                            <td>{{u.displayName}}</td>
+                            <td>{{u.email}}</td>
+                            <td></td>
+                            <td>
+                                <p-tag severity="success" value="{{u.role}}" *ngIf="u.role == 'Manager'"></p-tag>
+                                <p-tag severity="warning" value="{{u.role}}" *ngIf="u.role == 'Developer'"></p-tag>
+                                <p-tag severity="info" value="{{u.role}}" *ngIf="u.role == 'Designer'"></p-tag>
+                            </td>
+                            <!-- <td>
+                                <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success p-mr-2" [routerLink]="['/user/edit/{{u.}}']"></button>
+                                <button pButton pRipple icon="pi pi-trash"
+                                    class="p-button-rounded p-button-danger"></button>
+                            </td> -->
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+
+    </div>
+</div>

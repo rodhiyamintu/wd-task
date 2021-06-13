@@ -1,0 +1,85 @@
+<div class="wd-page wd-page-tabed">
+    <div class="wd-page-title">
+        <div class="wd-page-title-inner">
+            <h4>Add Task</h4>
+            <nav class="wd-breadcrumbs" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a [routerLink]="['/project']">Projects</a></li>
+                    <li class="breadcrumb-item"><a [routerLink]="['/task/'+pid]">Tasks</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Task</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="wd-page-title-control">
+            <button class="btn btn-primary btn-rounded" [routerLink]="['/task/'+pid]">Back</button>
+            <!-- <button class="btn btn-primary btn-rounded">Save</button> -->
+        </div>
+    </div>
+    <div class="wd-page-body">
+
+        <div class="wd-panel">
+            <div class="wd-panel-body">
+
+                <form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)">
+                    <input type="hidden" name="pid" [(ngModel)]="task.pid" />
+                    <input type="hidden" name="assignedName" [(ngModel)]="task.assignedName" />
+                    <input type="hidden" name="createdById" [(ngModel)]="task.createdById" />
+                    <input type="hidden" name="createdByName" [(ngModel)]="task.createdByName" />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Task Title</label>
+                                <input type="text" class="form-control" name="title" placeholder="Task Title"
+                                    [(ngModel)]="task.title" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="mb-3">
+                                <label class="form-label">Assigned To</label><br>
+                                <p-dropdown [options]="users" name="assignedId" [(ngModel)]="selectedUser"
+                                    [showClear]="true" optionLabel="displayName" optionValue="uid"
+                                    placeholder="Assigned To" [required]="true"
+                                    (onChange)="onChangeUser($event.originalEvent)">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="mb-3">
+                                <label class="form-label">Progress</label><br>
+                                <p-dropdown [options]="progress" name="progress" [(ngModel)]="selectedProgress"
+                                    [showClear]="true" optionLabel="name" optionValue="code" placeholder="Progress"
+                                    [required]="true">
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Description</label><br>
+                                <p-editor name="description" [(ngModel)]="task.description"
+                                    [style]="{'height':'320px'}">
+                                </p-editor>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button class="btn btn-primary btn-rounded" [disabled]="taskForm.invalid">Save</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<p-blockUI [blocked]="blocked">
+    <p-progressSpinner strokeWidth="4"></p-progressSpinner>
+</p-blockUI>
+<p-toast position="top-center" [showTransformOptions]="'translateX(100%)'"></p-toast>
