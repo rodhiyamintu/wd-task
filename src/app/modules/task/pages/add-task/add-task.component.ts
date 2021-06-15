@@ -87,7 +87,7 @@ export class AddTaskComponent implements OnInit {
             this.blocked = true;
 
             this.taskService.addTask(form.value).then((response) => {
-                this.messageService.add({ severity: 'success', summary: 'Task added successfully.', closable: false });
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Task added successfully.', closable: false });
                 // this.userForm.reset();
                 this.blocked = false;
             }).catch((error) => {

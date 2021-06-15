@@ -27,6 +27,22 @@ body {
     font-family: $roboto-font;
 }
 
+.not-found-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+
+    h2 {
+        font-weight: 900;
+        font-size: 2rem;
+        font-family: $roboto-condensed-font;
+        margin-bottom: 1rem;
+    }
+}
+
 /**************************************************/
 .wd-auth-wrapper {
     display: flex;
@@ -38,7 +54,7 @@ body {
 
     .wd-auth-inner {
         padding: 3rem 2rem;
-        min-width: 340px;
+        min-width: 430px;
         background: var(--light-color);
         @include border-radius(0.4rem);
 

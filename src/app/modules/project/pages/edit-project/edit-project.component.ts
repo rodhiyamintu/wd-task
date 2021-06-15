@@ -54,7 +54,6 @@ export class EditProjectComponent implements OnInit {
         // get all users
         this.getAllUsers();
 
-
         // progress
         for (let index = 1; index <= 10; index++) {
             this.progress.push({ name: `${index * 10}%`, code: `${index * 10}` });
@@ -69,7 +68,7 @@ export class EditProjectComponent implements OnInit {
 
             let projectValue = {
                 title: d.value.title,
-                assignedId: this.selectedUser.join(','),
+                assignedId: this.selectedUser,
                 progress: d.value.progress,
                 description: d.value.description,
                 createdById: d.value.createdById,
@@ -79,8 +78,7 @@ export class EditProjectComponent implements OnInit {
             }
 
             this.projectService.updateProject(this.projectId, projectValue).then((response) => {
-                this.messageService.add({ severity: 'success', summary: 'Project updated successfully.', closable: false });
-                // this.userForm.reset();
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Project updated successfully.', closable: false });
                 this.blocked = false;
             }).catch((error) => {
                 console.log(error);
@@ -117,7 +115,7 @@ export class EditProjectComponent implements OnInit {
                 }
 
                 this.selectedProgress = d.progress;
-                this.selectedUser = d.assignedId.split(',');
+                this.selectedUser = d.assignedId;
             })
         })
     }

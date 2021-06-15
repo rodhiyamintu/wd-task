@@ -80,8 +80,7 @@ export class AddProjectComponent implements OnInit {
             }
 
             this.projectService.addProject(projectValue).then((response) => {
-                this.messageService.add({ severity: 'success', summary: 'Project added successfully.', closable: false });
-                // this.userForm.reset();
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Project added successfully.', closable: false });
                 this.blocked = false;
                 console.log();
             }).catch((error) => {

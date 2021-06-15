@@ -90,7 +90,7 @@ export class EditTaskComponent implements OnInit {
             this.blocked = true;
 
             this.taskService.updatedTask(this.taskId, form.value).then((response) => {
-                this.messageService.add({ severity: 'success', summary: 'Task updated successfully.', closable: false });
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Task updated successfully.', closable: false });
                 // this.userForm.reset();
                 this.blocked = false;
             }).catch((error) => {

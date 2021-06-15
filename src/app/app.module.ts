@@ -11,12 +11,14 @@ import { ContentComponent } from './layouts/content/content.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
 import { environment } from 'src/environments/environment';
+import { PageNotFoundComponent } from './layouts/page-not-found/page-not-found.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         ContentComponent,
         AuthLayoutComponent,
+        PageNotFoundComponent,
     ],
     imports: [
         BrowserModule,

@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthResponse } from '../interfaces/auth-response';
+import { ErrorService } from './error.service';
 
 const CURRENT_USER = 'cuser';
 
@@ -15,12 +16,14 @@ export class AuthService {
 
     authState: any = null;
     currentUser = new BehaviorSubject<any>(null);
+    allUsers: [] = [];
 
     isLoggedIn = false;
     constructor(
         public fbAuth: AngularFireAuth,
         public fbDB: AngularFirestore,
-        public router: Router
+        public router: Router,
+        private errorService: ErrorService
     ) {
         this.fbAuth.authState.subscribe((auth) => {
             this.authState = auth;
@@ -43,7 +46,7 @@ export class AuthService {
 
     async login(email: string, password: string) {
 
-        await this.fbAuth.signInWithEmailAndPassword(email, password).then((response) => {
+        return await this.fbAuth.signInWithEmailAndPassword(email, password).then((response) => {
             this.isLoggedIn = true;
 
             this.fbDB.collection('users', ref => {
@@ -69,7 +72,7 @@ export class AuthService {
     async register(d: any) {
 
         // this.fbAuth.updateCurrentUser()
-        await this.fbAuth.createUserWithEmailAndPassword(d.email, d.password).then((response) => {
+        return await this.fbAuth.createUserWithEmailAndPassword(d.email, d.password).then((response) => {
             this.isLoggedIn = true;
             response.user?.updateProfile({
                 displayName: d.name,
@@ -101,7 +104,10 @@ export class AuthService {
         if (!userData) {
             // this.router.navigate(['/login']);
         } else {
-            this.currentUser.next(JSON.parse(userData));
+
+            const parseData = JSON.parse(userData);
+            this.getAllUsers(parseData.oid);
+            this.currentUser.next(parseData);
         }
     }
 
@@ -109,6 +115,7 @@ export class AuthService {
         this.isLoggedIn = false;
         this.fbAuth.signOut();
         localStorage.removeItem(CURRENT_USER);
+        this.currentUser.next(null);
         this.router.navigate(['/login']);
     }
 
@@ -128,5 +135,18 @@ export class AuthService {
         //         console.log(error)
         //     })
         // })
+    }
+
+    async getAllUsers(id: any) {
+        console.log('calling ' + id)
+        await this.fbDB.collection('users', ref =>
+            ref.where('oid', '==', id)).valueChanges().subscribe((data: any) => {
+                this.allUsers = data;
+                console.log(this.allUsers)
+            })
+    }
+
+    getUserInfo(id: any) {
+        return this.allUsers.filter((d: any) => d.uid == id);
     }
 }

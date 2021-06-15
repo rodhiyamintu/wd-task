@@ -42,7 +42,8 @@
                             </td>
                             <td>{{p.title}}</td>
                             <td>
-                                <p-chip label=""></p-chip>
+                                <p-chip label="{{userInfo(aid)}}" *ngFor="let aid of p.assignedId" class="mx-1">
+                                </p-chip>
                             </td>
                             <td>
                                 <p-progressBar [value]="p.progress"></p-progressBar>

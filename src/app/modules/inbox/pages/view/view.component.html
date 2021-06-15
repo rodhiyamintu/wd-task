@@ -24,7 +24,7 @@
                         <p-avatar label="P" size="large" shape="circle"></p-avatar>
                         <div class="d-flex flex-column px-2">
                             <b>{{inboxData.sendByName}}</b>
-                            <span>{{inboxData.sendByName}}</span>
+                            <span [style]="{'margin-top': '-5px'}">{{userInfo(inboxData.sendById)}}</span>
                         </div>
                     </div>
                     <div class="">

@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { MessageService } from 'primeng/api';
+import { Message } from 'primeng/api';
+import { ErrorService } from 'src/app/core/services/error.service';
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
-    styleUrls: ['./register.component.scss']
+    styleUrls: ['./register.component.scss'],
+    providers: [MessageService]
 })
 export class RegisterComponent implements OnInit {
     blocked: boolean = false;
     registerForm!: FormGroup;
+    msgs!: Message[];
 
     constructor(
         private fb: FormBuilder,
-        private authService: AuthService
+        private authService: AuthService,
+        private errorService: ErrorService
     ) { }
 
     ngOnInit(): void {
@@ -31,7 +37,11 @@ export class RegisterComponent implements OnInit {
         if (form.valid) {
             this.blocked = true;
             console.log(form.value)
-            this.authService.register(form.value)
+            this.authService.register(form.value).then((data) => {
+            }).catch((error) => {
+                this.msgs = [{ severity: 'error', summary: 'Error', detail: this.errorService.handleError(error) }]
+                this.blocked = false;
+            })
         }
     }
 

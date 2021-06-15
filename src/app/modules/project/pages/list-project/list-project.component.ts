@@ -43,4 +43,10 @@ export class ListProjectComponent implements OnInit {
             })
         })
     }
+
+    userInfo(id: any) {
+        const userDInfo: any = this.authService.getUserInfo(id);
+        // console.log(userDInfo)
+        return userDInfo[0] ? userDInfo[0].displayName : '';
+    }
 }

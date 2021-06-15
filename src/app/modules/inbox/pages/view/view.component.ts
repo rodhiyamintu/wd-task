@@ -50,9 +50,10 @@ export class ViewComponent implements OnInit {
 
             this.inboxService.viewMessage(param.id).then((data) => {
                 data.subscribe((result: any) => {
-                    console.log(result)
+                    // console.log(result)
                     this.inboxData = result;
                     this.blocked = false;
+                    // this.userInfo(this.inboxData.sendById);
                 })
             }).catch(error => {
                 console.log(error)
@@ -80,5 +81,10 @@ export class ViewComponent implements OnInit {
 
     onRowSelect(event: any) {
         console.log(event)
+    }
+
+    userInfo(id: any) {
+        const userDInfo: any = this.authService.getUserInfo(id);
+        return userDInfo[0] ? userDInfo[0].email : '';
     }
 }

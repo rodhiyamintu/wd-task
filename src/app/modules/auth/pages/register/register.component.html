@@ -1,6 +1,7 @@
 <div class="wd-auth-wrapper">
     <div class="wd-auth-inner">
         <h3>Create An Account!</h3>
+        <p-messages [(value)]="msgs" closeable="false"></p-messages>
         <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm)" novalidate>
             <div class="mb-3">
                 <label class="form-label">Organization Name<span>*</span></label>

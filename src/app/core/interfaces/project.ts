@@ -3,7 +3,7 @@ export interface Project {
     title: string;
     progress: string,
     description: string;
-    assignedId: string;
+    assignedId: any;
     createdById: string,
     createdByName: string,
     updatedAt?: Date;
