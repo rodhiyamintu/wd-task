@@ -25,7 +25,7 @@ export class AuthService {
         this.fbAuth.authState.subscribe((auth) => {
             this.authState = auth;
         })
-
+        // this.checkingFun('123456');
         this.autoSignIn();
     }
 
@@ -67,6 +67,8 @@ export class AuthService {
     }
 
     async register(d: any) {
+
+        // this.fbAuth.updateCurrentUser()
         await this.fbAuth.createUserWithEmailAndPassword(d.email, d.password).then((response) => {
             this.isLoggedIn = true;
             response.user?.updateProfile({
@@ -97,7 +99,7 @@ export class AuthService {
         const userData = localStorage.getItem(CURRENT_USER);
         // console.log(userData);
         if (!userData) {
-            this.router.navigate(['/login']);
+            // this.router.navigate(['/login']);
         } else {
             this.currentUser.next(JSON.parse(userData));
         }
@@ -108,5 +110,23 @@ export class AuthService {
         this.fbAuth.signOut();
         localStorage.removeItem(CURRENT_USER);
         this.router.navigate(['/login']);
+    }
+
+    async changePassword(password: any) {
+        // this.fbAuth.send
+
+        this.fbAuth.sendPasswordResetEmail('rodhiya.mintu@gmail.com').then((result) => {
+            console.log(result)
+        }).catch(error => {
+            console.log(error)
+        })
+
+        // await this.fbAuth.onAuthStateChanged((user) => {
+        //     user?.updatePassword(password).then((result) => {
+        //         console.log(result)
+        //     }).catch((error) => {
+        //         console.log(error)
+        //     })
+        // })
     }
 }

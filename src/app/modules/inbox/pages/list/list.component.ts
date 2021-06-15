@@ -4,6 +4,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { InboxService } from 'src/app/core/services/inbox.service';
 import { Inbox } from 'src/app/core/interfaces/inbox';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-list',
@@ -23,7 +24,8 @@ export class ListComponent implements OnInit {
         private authService: AuthService,
         private userService: UserService,
         private projectService: ProjectService,
-        private inboxService: InboxService
+        private inboxService: InboxService,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
@@ -46,5 +48,10 @@ export class ListComponent implements OnInit {
                 // this.loading = false;
             })
         })
+    }
+
+    onRowSelect(event: any) {
+        console.log(event)
+        this.router.navigate(['/message', event.data.docId])
     }
 }

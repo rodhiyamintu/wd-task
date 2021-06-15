@@ -18,9 +18,10 @@
         <div class="wd-panel">
             <div class="wd-panel-body">
 
-                <p-table #dt1 [value]="inboxMessages" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+                <p-table #dt1 [value]="inboxMessages" selectionMode="single" [paginator]="true" [rows]="10"
+                    [showCurrentPageReport]="true"
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                    [rowsPerPageOptions]="[10,25,50]" [loading]="loading">
+                    [rowsPerPageOptions]="[10,25,50]" [loading]="loading" (onRowSelect)="onRowSelect($event)">
                     <ng-template pTemplate="header">
                         <tr>
                             <th width="5%"></th>
@@ -28,15 +29,13 @@
                             </th>
                             <th width="20%">From</th>
                             <th>Date</th>
-                            <th width="8%">Action</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-msg>
-                        <tr>
+                        <tr [pSelectableRow]="msg">
                             <td>
-                                <button pButton pRipple type="button" icon="pi pi-bars" class="p-button-rounded"
-                                    pTooltip="Tasks" tooltipPosition="bottom"
-                                    [routerLink]="['/task/'+msg.docId]"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                                    pTooltip="Delete" tooltipPosition="bottom"></button>
                             </td>
                             <td>{{msg.subject}}</td>
                             <td>
@@ -44,14 +43,6 @@
                             </td>
                             <td>
                                 {{msg.createdAt.seconds * 1000 | date:' LLL dd, yyyy hh:mm:aa'}}
-                            </td>
-                            <td>
-                                <button pButton pRipple icon="pi pi-eye"
-                                    class="p-button-rounded p-button-primary p-mr-2"
-                                    [routerLink]="['/project/edit/'+ msg.docId]" pTooltip="View"
-                                    tooltipPosition="bottom"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
-                                    pTooltip="Delete" tooltipPosition="bottom"></button>
                             </td>
                         </tr>
                     </ng-template>

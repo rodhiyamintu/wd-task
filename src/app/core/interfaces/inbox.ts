@@ -6,6 +6,6 @@ export interface Inbox {
     message: string;
     subject: string;
     oid: string;
-    createdAt?: Date;
+    createdAt?: any;
     updatedAt?: Date;
 }

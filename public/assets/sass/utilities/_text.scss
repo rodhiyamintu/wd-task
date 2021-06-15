@@ -1,0 +1,12 @@
+// text color
+@each $key, $value in $colors {
+    .text-#{$key} {
+        color: map-get($map: $value, $key: "bg-color") !important;
+        &:hover,
+        &:focus,
+        &:active,
+        &:active:focus {
+            color: darken($color: map-get($map: $value, $key: "bg-color"), $amount: 10%) !important;
+        }
+    }
+}

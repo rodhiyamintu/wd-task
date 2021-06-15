@@ -1,0 +1,46 @@
+<div class="wd-page wd-page-tabed">
+    <div class="wd-page-title">
+        <div class="wd-page-title-inner">
+            <h4>{{inboxData.subject}}</h4>
+            <nav class="wd-breadcrumbs" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a [routerLink]="['/message']">Messages</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{inboxData.subject}}</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="wd-page-title-control">
+            <button class="btn btn-primary btn-rounded" [routerLink]="['/message']">Back</button>
+        </div>
+    </div>
+    <div class="wd-page-body">
+
+        <div class="wd-panel">
+            <div class="wd-panel-body">
+
+                <div class="d-flex align-items-center justify-content-between border-bottom pb-3">
+                    <div class="d-flex align-items-center">
+                        <p-avatar label="P" size="large" shape="circle"></p-avatar>
+                        <div class="d-flex flex-column px-2">
+                            <b>{{inboxData.sendByName}}</b>
+                            <span>{{inboxData.sendByName}}</span>
+                        </div>
+                    </div>
+                    <div class="">
+                        {{inboxData.createdAt.seconds * 1000 | date:' LLL dd, yyyy hh:mm:aa'}}
+                    </div>
+                </div>
+
+                <div class="mt-4" [innerHTML]="inboxData.message"></div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<p-blockUI [blocked]="blocked">
+    <p-progressSpinner strokeWidth="4"></p-progressSpinner>
+</p-blockUI>
+<p-toast position="top-center" [showTransformOptions]="'translateX(100%)'"></p-toast>

@@ -27,5 +27,10 @@ export class InboxService {
             ref.where('to', 'array-contains', id)).valueChanges({ idField: 'docId' });
     }
 
+    async viewMessage(id: any) {
+        // return await this.fbDB.collection('inbox', ref =>
+        //     ref.where('id', '==', id)).valueChanges({ idField: 'docId' });
 
+        return await this.inboxRef.doc(id).valueChanges({ idField: 'docId' });
+    }
 }
